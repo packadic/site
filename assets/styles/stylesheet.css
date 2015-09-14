@@ -12499,11 +12499,11 @@ code.hljs {
 }
 
 .quick-sidebar .qs-tabs-wrapper {
-  padding: 7px 15px;
-  border-bottom: 1px solid #414952;
+  padding: 7px 0;
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 245px;
+  margin-left: 15px;
 }
 
 .quick-sidebar .qs-tabs {
@@ -12525,6 +12525,12 @@ code.hljs {
 .quick-sidebar .qs-tabs .qs-tab:not(.active) {
   transition: all 500ms linear;
   color: #5e676b;
+}
+
+.quick-sidebar .qs-seperator {
+  width: 100%;
+  height: 1px;
+  background-color: #414952;
 }
 
 .quick-sidebar .qs-content {

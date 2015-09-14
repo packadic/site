@@ -82,7 +82,7 @@ module packadic.layout {
             $tabs.parent().jcarousel({
                 list: '.qs-tabs',
                 items: '.qs-tab',
-                center: true,
+                //center: true,
                 wrap: 'both'
             });
             //$('<div>').css(style).appendTo($tabs);

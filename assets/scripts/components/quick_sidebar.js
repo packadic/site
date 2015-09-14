@@ -70,7 +70,6 @@ var packadic;
                 $tabs.parent().jcarousel({
                     list: '.qs-tabs',
                     items: '.qs-tab',
-                    center: true,
                     wrap: 'both'
                 });
             };
