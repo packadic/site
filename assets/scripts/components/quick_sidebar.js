@@ -159,13 +159,16 @@ var packadic;
                     }
                     return;
                 }
-                var height = this.$e.outerHeight() - this.$e.find('.qs-header').outerHeight() - this.$e.find('.qs-tabs').outerHeight();
+                var height = this.$e.outerHeight()
+                    - this.$e.find('.qs-header').outerHeight()
+                    - this.$e.find('.qs-tabs-wrapper').outerHeight()
+                    - this.$e.find('.qs-seperator').outerHeight();
                 $target.ensureClass('active');
                 $(this).addClass('.active');
                 this.$e.find('.qs-tabs .qs-tab').removeClass('active');
                 var $tab = this.$e.find('.qs-tabs .qs-tab[data-target="#' + $target.attr('id') + '"]').addClass('active');
-                var $tabs = this.$e.find('.qs-tabs-wrapper');
-                $tabs.jcarousel('scroll', $tab);
+                var $tabsWrapper = this.$e.find('.qs-tabs-wrapper');
+                $tabsWrapper.jcarousel('scroll', $tab);
                 this.switching = true;
                 setTimeout(function () {
                     packadic.plugins.makeSlimScroll($target, { height: height, wheelStep: packadic.isTouchDevice() ? 60 : 20 });
