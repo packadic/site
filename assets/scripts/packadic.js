@@ -1021,6 +1021,14 @@ var packadic;
                 }
                 return this;
             };
+            $.fn.onClick = function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i - 0] = arguments[_i];
+                }
+                var $this = $(this);
+                return $this.on.apply($this, [packadic.isTouchDevice() ? 'touchend' : 'click'].concat(args));
+            };
         }
         plugins.registerHelperPlugins = registerHelperPlugins;
     })(plugins = packadic.plugins || (packadic.plugins = {}));

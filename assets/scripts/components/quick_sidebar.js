@@ -65,7 +65,7 @@ var packadic;
             };
             QuickSidebarComponent.prototype._initBindings = function () {
                 var self = this;
-                $body.on('click', '[data-quick-sidebar]', function (e) {
+                $body.onClick('[data-quick-sidebar]', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
                     var $this = $(this);
@@ -94,14 +94,14 @@ var packadic;
                     }
                     packadic.debug.log('[data-quick-sidebar]', 'action: ', action, 'target: ', target);
                 });
-                $body.on('click', '.quick-sidebar .qs-header button', function (e) {
+                $body.onClick('.quick-sidebar .qs-header button', function (e) {
                     var $this = $(this);
                     $this.blur();
                 });
-                $body.on('click', '.quick-sidebar .qs-tab', function (e) {
+                $body.onClick('.quick-sidebar .qs-tab', function (e) {
                     self.open($(this).attr('data-target'));
                 });
-                $(document).on('click', '.qs-shown', function (e) {
+                $(document).onClick('.qs-shown', function (e) {
                     if ($(e.target).closest('.quick-sidebar').length > 0) {
                         return;
                     }
