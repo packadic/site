@@ -55,12 +55,23 @@ var packadic;
             QuickSidebarComponent.prototype._initTabs = function () {
                 var self = this;
                 var $tabs = this.$e.find('.qs-tabs').first();
+                var style = {
+                    width: $tabs.parent().width(),
+                    height: $tabs.innerHeight() - 1,
+                    float: 'left'
+                };
                 this.$e.find('.qs-content').each(function () {
                     var tab = $('<div>')
                         .addClass('qs-tab')
                         .text($(this).attr('data-name'))
                         .attr('data-target', '#' + $(this).attr('id'));
                     tab.appendTo($tabs);
+                });
+                $tabs.parent().jcarousel({
+                    list: '.qs-tabs',
+                    items: '.qs-tab',
+                    center: true,
+                    wrap: 'both'
                 });
             };
             QuickSidebarComponent.prototype._initBindings = function () {
@@ -71,7 +82,7 @@ var packadic;
                     var $this = $(this);
                     var action = $this.attr('data-quick-sidebar');
                     var target = $this.attr('data-target');
-                    target = target || self.$e.find('qs-content').first();
+                    target = target || self.$e.find('.qs-content').first();
                     switch (action) {
                         case 'open':
                             self.open(target);
@@ -136,15 +147,14 @@ var packadic;
                 this.$e.find('.qs-content.active').removeClass('active');
             };
             QuickSidebarComponent.prototype.openTarget = function ($target) {
-                var _this = this;
                 var height = this.$e.outerHeight() - this.$e.find('.qs-header').outerHeight() - this.$e.find('.qs-tabs').outerHeight();
                 $target.ensureClass('active');
                 $(this).addClass('.active');
                 this.$e.find('.qs-tabs .qs-tab').removeClass('active');
-                this.$e.find('.qs-tabs .qs-tab[data-target="#' + $target.attr('id') + '"]').addClass('active');
-                this.$e.css('overflow', 'hidden');
+                var $tab = this.$e.find('.qs-tabs .qs-tab[data-target="#' + $target.attr('id') + '"]').addClass('active');
+                var $tabs = this.$e.find('.qs-tabs-wrapper');
+                $tabs.jcarousel('scroll', $tab);
                 setTimeout(function () {
-                    _this.$e.css('overflow', 'auto');
                     packadic.plugins.makeSlimScroll($target, { height: height });
                     $target.trigger("mouseleave");
                 }, this.config('quickSidebar.transitionTime'));

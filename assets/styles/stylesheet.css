@@ -12481,7 +12481,7 @@ code.hljs {
   bottom: 0;
   right: -275px;
   transition: right 0.2s;
-  overflow-x: auto;
+  overflow: hidden;
   color: #b0bec5;
 }
 
@@ -12498,19 +12498,17 @@ code.hljs {
   color: #bac1c8;
 }
 
-.quick-sidebar .qs-tabs {
+.quick-sidebar .qs-tabs-wrapper {
   padding: 7px 15px;
   border-bottom: 1px solid #414952;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
-.quick-sidebar .qs-tabs:before,
-.quick-sidebar .qs-tabs:after {
-  content: " ";
-  display: table;
-}
-
-.quick-sidebar .qs-tabs:after {
-  clear: both;
+.quick-sidebar .qs-tabs {
+  width: 20000em;
+  position: relative;
 }
 
 .quick-sidebar .qs-tabs .qs-tab {
@@ -12608,6 +12606,10 @@ code.hljs {
   }
   .page-footer-fixed .quick-sidebar {
     bottom: 0;
+  }
+  .quick-sidebar .qs-tabs .qs-tab {
+    font-size: 18px;
+    padding: 0 20px 0 0;
   }
 }
 
