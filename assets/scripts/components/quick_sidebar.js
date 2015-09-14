@@ -42,7 +42,9 @@ var packadic;
                     trigger: 'hover focus',
                     selector: false
                 });
-                this.$e.find('.qs-header .btn[data-quick-sidebar]').tooltip(ttOpts);
+                if (!packadic.isTouchDevice()) {
+                    this.$e.find('.qs-header .btn[data-quick-sidebar]').tooltip(ttOpts);
+                }
                 this._initTabs();
                 this._initBindings();
                 this._initResizeHandler();

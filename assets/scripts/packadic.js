@@ -154,7 +154,9 @@ var packadic;
             $(function () {
                 _this.emit('boot', _this);
                 _this.timers.boot = new Date;
-                $body.tooltip(_this.config('vendor.bootstrap.tooltip'));
+                if (!packadic.isTouchDevice()) {
+                    $body.tooltip(_this.config('vendor.bootstrap.tooltip'));
+                }
                 $body.popover(_this.config('vendor.bootstrap.popover'));
                 $.material.options = _this.config('vendor.material');
                 $.material.init();
