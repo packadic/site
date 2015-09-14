@@ -17,6 +17,8 @@ var packadic;
             __extends(QuickSidebarComponent, _super);
             function QuickSidebarComponent() {
                 _super.apply(this, arguments);
+                this.switching = false;
+                this.switchingTimeout = false;
             }
             Object.defineProperty(QuickSidebarComponent.prototype, "$e", {
                 get: function () {
@@ -146,6 +148,17 @@ var packadic;
                 this.$e.find('.qs-content.active').removeClass('active');
             };
             QuickSidebarComponent.prototype.openTarget = function ($target) {
+                var _this = this;
+                if (this.switching) {
+                    if (this.switchingTimeout = false) {
+                        setTimeout(function () {
+                            _this.openTarget($target);
+                            _this.switching = false;
+                        }, this.config('quickSidebar.transitionTime'));
+                        this.switchingTimeout = true;
+                    }
+                    return;
+                }
                 var height = this.$e.outerHeight() - this.$e.find('.qs-header').outerHeight() - this.$e.find('.qs-tabs').outerHeight();
                 $target.ensureClass('active');
                 $(this).addClass('.active');
@@ -153,9 +166,11 @@ var packadic;
                 var $tab = this.$e.find('.qs-tabs .qs-tab[data-target="#' + $target.attr('id') + '"]').addClass('active');
                 var $tabs = this.$e.find('.qs-tabs-wrapper');
                 $tabs.jcarousel('scroll', $tab);
+                this.switching = true;
                 setTimeout(function () {
-                    packadic.plugins.makeSlimScroll($target, { height: height });
+                    packadic.plugins.makeSlimScroll($target, { height: height, wheelStep: packadic.isTouchDevice() ? 60 : 20 });
                     $target.trigger("mouseleave");
+                    _this.switching = false;
                 }, this.config('quickSidebar.transitionTime'));
             };
             QuickSidebarComponent.prototype.isClosed = function () {
@@ -191,6 +206,9 @@ var packadic;
                 return this;
             };
             QuickSidebarComponent.prototype.next = function () {
+                if (this.switching) {
+                    return;
+                }
                 var $next = this.getActive().parent().next('.qs-content:not(.active)');
                 if ($next.length == 0) {
                     $next = this.$e.find('.qs-content').first();
@@ -201,6 +219,9 @@ var packadic;
                 return this;
             };
             QuickSidebarComponent.prototype.prev = function () {
+                if (this.switching) {
+                    return;
+                }
                 var $prev = this.getActive().parent().prev('.qs-content:not(.active)');
                 if ($prev.length == 0) {
                     $prev = this.$e.find('.qs-content').last();
