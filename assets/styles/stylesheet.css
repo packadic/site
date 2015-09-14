@@ -12613,6 +12613,11 @@ code.hljs {
   .page-footer-fixed .quick-sidebar {
     bottom: 0;
   }
+  .quick-sidebar .qs-tabs-wrapper {
+    width: 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
   .quick-sidebar .qs-tabs .qs-tab {
     font-size: 18px;
     padding: 0 20px 0 0;
