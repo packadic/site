@@ -1,0 +1,30 @@
+<!DOCTYPE html><!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html lang="en" class="ie9"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"><!--<![endif]-->
+  <head>
+    <title>test</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  </head>
+  <body>
+    <div id="testPluginContainer">testPlugin</div>
+    <div id="testWidgetContainer">testWidget</div>
+    <script src="assets/scripts/vendor.min.js"></script>
+    <script src="assets/scripts/packadic.js"></script>
+    <script>
+      // last
+      var app = packadic.Application.instance;
+      app.DEBUG = true;
+      app.init({
+          hello: 'test'
+      });
+      app.boot().then(function(app){
+          $('#testPluginContainer').testPlugin({
+      
+          });
+          $('#testWidgetContainer').testWidget({});
+      });
+    </script>
+  </body>
+</html>
